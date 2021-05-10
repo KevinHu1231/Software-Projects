@@ -1,0 +1,92 @@
+# import the necessary packages
+#from pyimagesearch import imutils
+from skimage import exposure
+import numpy as np
+from matplotlib import pyplot as plt
+import argparse
+import imutils
+import cv2
+ 
+# construct the argument parser and parse the arguments
+ap = argparse.ArgumentParser()
+ap.add_argument("-q", "--query", required = True,
+	help = "Path to the query image")
+args = vars(ap.parse_args())
+
+# load the query image, compute the ratio of the old height
+# to the new height, clone it, and resize it
+image = cv2.imread(args["query"])
+ratio = image.shape[0] / 300.0
+orig = image.copy()
+image = imutils.resize(image, height = 300)
+ 
+# convert the image to grayscale, blur it, and find edges
+# in the image
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+gray = cv2.bilateralFilter(gray, 11, 17, 17)
+edged = cv2.Canny(gray, 30, 200)
+
+plt.subplot(121),plt.imshow(image,cmap = 'gray')
+plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(122),plt.imshow(edged,cmap = 'gray')
+plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
+
+plt.show()
+
+# find contours in the edged image, keep only the largest
+# ones, and initialize our screen contour
+cnts = cv2.findContours(edged.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+cnts = imutils.grab_contours(cnts)
+cnts = sorted(cnts, key = cv2.contourArea, reverse = True)[:10]
+screenCnt = None
+
+# loop over our contours
+for c in cnts:
+	# approximate the contour
+	peri = cv2.arcLength(c, True)
+	approx = cv2.approxPolyDP(c, 0.015 * peri, True)
+ 
+	# if our approximated contour has four points, then
+	# we can assume that we have found our screen
+	if len(approx) == 4:
+		screenCnt = approx
+		break
+
+trial = np.array(screenCnt)
+trial = trial[0]
+#print(trial)
+
+center = (screenCnt[0] + screenCnt[1] + screenCnt[2] + screenCnt[3]) / 4
+center = np.array(center, dtype = np.int64)
+trial[0] = np.array([365, 300])
+
+origin = np.array(trial / 2, np.int64)
+
+corner = np.array([[center[0][0], origin[0][1]]])
+move = np.array([corner[0], origin[0], center[0]])
+
+maxDist = 0
+i = 0
+for i in range (0, 3, 1):
+	j = i
+	for j in range (0, 4, 1):
+		temp = np.absolute(screenCnt[i] - screenCnt[j])
+		tDist = np.sqrt(np.square(temp[0][0]) + np.square(temp[0][1]))
+		if tDist > maxDist:
+			maxDist = tDist
+
+realDiag = np.sqrt(2 * np.square(68))
+
+scale = realDiag / maxDist
+
+pixelDist = np.absolute(origin - center)
+print(pixelDist)
+
+actDist = scale * pixelDist
+print(actDist)
+
+cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 3)
+cv2.drawContours(image, [center], -1, (0, 255, 0), 3)
+cv2.drawContours(image, [move], -1, (0, 255, 0), 3)
+cv2.imshow("Final Contour", image)
+cv2.waitKey(0)
