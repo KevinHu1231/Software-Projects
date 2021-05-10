@@ -1,3 +1,3 @@
 This project was about constraint satisfaction problems (CSPs) and the goal was to create an algorithm that would solve general constraint satisfaction problems using forward 
 checking and Generalized Arc Consistency (GAC). The project also involved creating a program that would be able to solve tenner puzzle grids. Starter code was given in 
-csp_base.py and the csp_
+cspbase.py. The solver is in the file propagators.py and the tenner puzzle solver is in the file tenner_csp.py.
