@@ -1,1 +1,7 @@
-
+This project was to create an AI that could play the two player game Othello. Starter code was given (othello_game.py, othello_gui.py, and othello_shared.py) to implement the 
+game in code. The assignment was to create an AI that would generate moves given a particular board state. The assignment involved creating functions to examine game trees,
+includings ones that could perform the minimax algorithm and alpha-beta pruning algorithm. Improvements were made to the algorithms by implementing state caching and node
+ordering. The assignment also involved creating a custom heuristic function to judge how good a particular board state was. The heuristic function gives a result based on
+different weighted parameters. The heuristic function was improved by continuously adjusting the weights of each parameter and training on (playing against) slightly different 
+versions of the heuristic function, to find the better function depending on the winner of each game. The functionality of the code was tested using an autograder 
+(autograder.py) and an AI that made random moves (randy_ai.py).
