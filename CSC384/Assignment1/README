@@ -1,1 +1,6 @@
-
+These files are for the Snowman Search assignment. The objective of the game is to get three different sized snowballs to the goal position and stack them like a snowman using
+a robot while avoiding wall obstacles. The robot can move in the four cardinal directions and push the snowballs in the same direction if the snowball in the square next to it.
+The snowballs can be stacked if there are two snowballs in the two squares next to the robot and the first one smaller than the second snowball. Different search algorithms
+are used to solve the problem including A* search, greedy search and heuristic search. Some example maps are given in test_problems.py and the solution and implemented search 
+algorithms are given in solution.py. The autograder is used to test the solution. Starter code was given with the search.py and snowman.py files which implemented the game 
+in code.
