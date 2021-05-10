@@ -1,1 +1,2 @@
-# Software-Projects
+Software-Projects
+This is a compilation of my many software assignments and projects done over the past couple years.
