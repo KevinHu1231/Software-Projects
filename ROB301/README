@@ -1,1 +1,2 @@
-
+Here is code that implemented Bayesian Localization techniques in ROSpy to simulate a robot delivering packages to different locations around a track. The robot used a colour
+sensor to follow a line using a PID controller identify different locations around the map which were represented using different colours.
