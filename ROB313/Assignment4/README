@@ -1,1 +1,2 @@
-
+This assignment was about using Bayesian methods to calculate the marginal likelihood to select a model for a particular problem. Using the model, a binary classification 
+problem was solved using importance sampling. The assignment also involved using Bayesian inference to predict the trend of a time varying particular dataset.
