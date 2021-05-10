@@ -1,1 +1,2 @@
-
+This assignment was about implementing gradient decent to calculate the MAP estimate for a logistic regression problem. The assignment also included implementing a neural 
+network using numpy and autograd to identify mnist digits.
