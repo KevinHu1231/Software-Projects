@@ -1,1 +1,2 @@
-
+This project was about constraint satisfaction problems and the goal was to create an algorithm that would solve general constraint satisfaction problems using forward checking
+and Generalized Arc Consistency (GAC). The project also involved creating a program that would be able to solve tenner puzzle grids. 
