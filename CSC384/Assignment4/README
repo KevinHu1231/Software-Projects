@@ -1,1 +1,3 @@
-This project was about Natural Language Processing.
+This project was about Natural Language Processing and the problem was to be able to correctly label the types of words in a file. To solve the problem, Hidden Markov Models 
+(HMMs) were implemented in Python code. The Viterbi algorithm was implemented within the code and used to solve the problem. The final program was able to achieve around
+85% accuracy for correct labels out of 91 different labels. The autograder was used to test the functionality of the program.
